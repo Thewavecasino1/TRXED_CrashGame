@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="minimal-ui,width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"
+    />
+    <title>Tron API Examples in imToken</title>
+  </head>
+
+  <body>
+    <h1 id="h1">Tron API Examples in imToken</h1>
+    <section>
+      <button>getAccount</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          tronWeb.trx.getAccount().then(function(account) {
+            alert(fromHex(account.address))
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>send trx</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var params = {
+            to: 'TKAq3yibHBJHyXydrN1ksEhZhGT3mWbvGE',
+            amount: '1000',
+          }
+          tronWeb.trx.sendTransaction(params.to, params.amount).then(function(result) {
+            alert(result)
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>send trc10</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var params = {
+            to: 'TKAq3yibHBJHyXydrN1ksEhZhGT3mWbvGE',
+            amount: '1000',
+            tokenID: 1002742, // PLANET
+          }
+          tronWeb.trx.sendToken(params.to, params.amount, params.tokenID).then(function(result) {
+            alert(result)
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>transfer trc20</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+          var to = "TKAq3yibHBJHyXydrN1ksEhZhGT3mWbvGE"
+          var amount = 10000 // 0.01 usdt
+          tronWeb.contract().at(usdtContractAddress).then(function(contract) {
+            contract.transfer(to, amount).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>approve usdt</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+          var spender = "TDBpcDnAHCy5vgGFvaPNDZo616ksY5FDfT"
+          var amount = 100000000 // 10 usdt
+          tronWeb.contract().at(usdtContractAddress).then(function(contract) {
+            contract.approve(spender, amount).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>transferFrom trc20</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+          var from = tronWeb.defaultAddress.base58
+          var to = "TKAq3yibHBJHyXydrN1ksEhZhGT3mWbvGE"
+          var amount = 10000 // 0.01 usdt
+          tronWeb.contract().at(usdtContractAddress).then(function(contract) {
+            contract.transferFrom(from, to, amount).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>transfer trc721</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var contractAddress = "TYZNexa4bVJ8i5i6XKo8FGq3Gaho7wj1MV"
+          var from = tronWeb.defaultAddress.base58
+          var to = "TKAq3yibHBJHyXydrN1ksEhZhGT3mWbvGE"
+          var tokenId = 174242
+          tronWeb.contract().at(contractAddress).then(function(contract) {
+            contract.transferFrom(from, to, tokenId).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>approve trc721</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var contractAddress = "TYZNexa4bVJ8i5i6XKo8FGq3Gaho7wj1MV"
+          var spender = "TKAq3yibHBJHyXydrN1ksEhZhGT3mWbvGE"
+          var tokenId = 174242
+          tronWeb.contract().at(contractAddress).then(function(contract) {
+            contract.approve(spender, tokenId).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>safeTransferFrom trc721</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var contractAddress = "TYZNexa4bVJ8i5i6XKo8FGq3Gaho7wj1MV"
+          var from = tronWeb.defaultAddress.base58
+          var to = "TKAq3yibHBJHyXydrN1ksEhZhGT3mWbvGE"
+          var tokenId = 174242
+          tronWeb.contract().at(contractAddress).then(function(contract) {
+            contract.safeTransferFrom(from, to, tokenId).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>burn trc20</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var WIN = "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7"
+          var amount = 10000
+          tronWeb.contract().at(WIN).then(function(contract) {
+            contract.burn(amount).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>mint trc20</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var WIN = "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7"
+          var to = "TKAq3yibHBJHyXydrN1ksEhZhGT3mWbvGE"
+          var amount = 10000
+          tronWeb.contract().at(WIN).then(function(contract) {
+            contract.mint(to, amount).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+
+    <section>
+      <button>addLiquidity</button>
+      <details>
+        <summary>show code</summary>
+        <pre>
+          var JUST_SWAP = "TUEYcyPAqc4hTg1fSuBCPc18vGWcJDECVw"
+          var min_liquidity = 10000
+          var max_tokens = 10000
+          var deadline = 10000
+          tronWeb.contract().at(JUST_SWAP).then(function(contract) {
+            contract.addLiquidity(min_liquidity, max_tokens, deadline).send({
+              feeLimit: 100000000
+            }).then(function(result) {
+              alert(result)
+            })
+          })
+        </pre>
+      </details>
+    </section>
+  </body>
+  <script src="src/index.js"></script>
+</html>
